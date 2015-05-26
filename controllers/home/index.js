@@ -9,13 +9,24 @@ module.exports  = function  homeController (lelchat, db) {
    * Render home page
    */
   router.get('/', function(req, res) {
-   
-    db.run('INSERT INTO messages VALUES(1, 1, "2015-05-26", "willeponken", "teeest");');
-    db.each("SELECT rowid AS id, text FROM messages", function(err, row) {
-      console.log(row.id + ": " + row.text);
+    var messages = [];
+
+    db.each('SELECT * FROM messages', function(err, row) {
+      messages.push({
+        name: row.name,
+        date: row.date,
+        text: row.text
+      });
+    },
+    function(err) {
+      if (err) {
+        return res.sendStatus(500).end();
+      }
+
+      return res.render('home', {
+        messages: messages
+      });
     });
-    
-    res.render('home');
 
   });
 

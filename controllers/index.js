@@ -10,6 +10,11 @@ module.exports  = function  controllerIndex(lelchat, db) {
   lelchat.use('/', require('./home')(lelchat, db));
 
   /*
+   * ADMIN controller
+   */
+  lelchat.use('/admin', require('./admin')());
+
+  /*
    * API controller
    */
   lelchat.use('/api', require('./api')(lelchat, db));

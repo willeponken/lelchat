@@ -1,0 +1,32 @@
+extends ./layout.jade
+
+block title
+  title lelchat - Admin
+
+block content
+  h1 lelchat - Admin
+  em Quality administration using shit like SQL.
+
+  hr
+
+  div
+    h3 Register user
+    form(action='/api/register', method='post', id='registerSubmit')
+        p
+          label Name
+          br
+          input(type='text', name='name',placeholder='bigstuff89')
+
+        p
+          label Password
+          br
+          input(type='password', name='password', placeholder='qwerty123')
+ 
+        p 
+          label Type
+          br
+          select(name='type')
+            option(value='0') Admin
+            option(value='1') User
+
+      button(type='submit', form='registerSubmit', value='Submit') Submit
