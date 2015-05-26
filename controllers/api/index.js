@@ -37,7 +37,7 @@ return module.exports = function apiController (lelchat, db) {
         return res.sendStatus(401).end();
       }
      
-      console.log(user);
+      
       // Compare password and the stored hash
       bcrypt.compare(body.password, user.password, function(err, result) {
         if (err) {
@@ -53,6 +53,7 @@ return module.exports = function apiController (lelchat, db) {
                                               body.text  + '");');  // Text message
           
 
+          console.info('Saved new message from: ' + user.name);
           return res.redirect('/');
         }
       });
@@ -103,6 +104,7 @@ return module.exports = function apiController (lelchat, db) {
                                          hash                + '", "' + // Hashed password for user
                                          parseInt(body.type) + '");');  // User type (0 or 1)
 
+        console.info('New user registered: ' + body.name + ' as type: ' + body.type);
         return res.redirect('back'); // Return to where referer points
       });
 
