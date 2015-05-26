@@ -1,0 +1,37 @@
+extends ./layout.jade
+
+block content
+  h1 lelchat
+  em Quality messaging using shit like SQL.
+
+  hr
+
+  div
+    h3 Send message
+    form
+        p
+          label Name
+          br
+          input(type='text', placeholder='bigstuff89')
+
+        p
+          label Password
+          br
+          input(type='password', placeholder='qwerty123')
+ 
+        p 
+          label Text message
+          br
+          textarea(cols='50', rows='5', placeholder='Write a cute message here')
+
+      button(type='submit') Submit
+
+  hr
+
+  div
+    h3 Chat
+    pre
+      each message in [{ user: 'jeff', time: '26 May 2015', text: 'fucktards' }]
+        = message.user
+        = ' (' + message.time + '): '
+        = message.text
