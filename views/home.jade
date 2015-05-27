@@ -9,22 +9,12 @@ block content
   div
     h3 Send message
     form(action='/api/message', method='post', id='messageSubmit')
-        p
-          label Name
-          br
-          input(type='text', name='name',placeholder='bigstuff89')
+      p 
+        label Text message
+        br
+        textarea(cols='50', rows='5', name='text', placeholder='Write a cute message here')
 
-        p
-          label Password
-          br
-          input(type='password', name='password', placeholder='qwerty123')
- 
-        p 
-          label Text message
-          br
-          textarea(cols='50', rows='5', name='text', placeholder='Write a cute message here')
-
-      button(type='submit', form='messageSubmit', value='Submit') Submit
+      button(type='submit', form='messageSubmit') Submit
 
   hr
 

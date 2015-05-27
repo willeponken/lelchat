@@ -2,7 +2,7 @@
 
 var router  = require('express').Router();
 
-module.exports  = function  homeController (lelchat, db) {
+module.exports  = function  homeController (db) {
 
   /*
    * GET /

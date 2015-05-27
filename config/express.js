@@ -2,6 +2,7 @@
 
 var bodyParser  = require('body-parser'),
     express     = require('express'),
+    session     = require('express-session'),
     path        = require('path');
 
 return module.exports  = function  expressConfiguraion (lelchat) {
@@ -19,14 +20,16 @@ return module.exports  = function  expressConfiguraion (lelchat) {
                         8080);                // falling back to fixed port
   lelchat.set('views', path.join(__dirname, '../views'));
   lelchat.set('view engine', 'jade');
-  lelchat.set('jsonp callback', true);
 
   // USE variables
+  lelchat.use(session({
+    secret: 'Magnus Kronnäs', // Magnus är hemligheten till allas sessioner!
+    resave: false,
+    saveUninitialized: true
+  }));
   lelchat.use(bodyParser.urlencoded({ // support for parsing url encoding
     extended: true
   }));
-  lelchat.use(bodyParser.json());     // support for parsing JSON
-  lelchat.use(express.static(path.join(__dirname, '../public')));
 
 
   /*

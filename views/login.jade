@@ -1,0 +1,25 @@
+extends ./layout.jade
+
+block title
+  title lelchat - Login
+
+block content
+  h1 lelchat - Login
+  em Quality login using shit like SQL.
+
+  hr
+
+  div
+    h3 Login
+    form(action='/', method='post', id='loginSubmit')
+      p
+        label Name
+        br
+        input(type='text', name='name', placeholder='bigstuff89')
+
+      p
+        label Password
+        br
+        input(type='password', name='password', placeholder='qwerty123')
+
+      button(type='submit', form='loginSubmit') Authenticate
