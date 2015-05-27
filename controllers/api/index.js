@@ -120,7 +120,7 @@ return module.exports = function apiController (lelchat, db) {
           return next(new Error(err));
         }
 
-        db.run('INSERT INTO users VALUES(NULL, $name, $hash, $type', {
+        db.run('INSERT INTO users VALUES(NULL, $name, $hash, $type)', {
           $name: body.name,           // User name
           $hash: hash,                // Hashed password for user  
           $type: parseInt(body.type)  // User type (0 or 1)
