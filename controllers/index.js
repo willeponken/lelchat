@@ -28,13 +28,4 @@ module.exports  = function  controllerIndex(lelchat, db) {
    * Error handler
    */
   lelchat.use(require('./error'));
-
-  /*
-   * Default route for unhandled requests
-   */
-  lelchat.use(function(req, res) {
-    res.status(404);
-
-    return res.type('txt').send('Not found');
-  });
 };
