@@ -86,7 +86,7 @@ return module.exports = function apiController (lelchat, db) {
 
     // Check if user already exists
     db.get('SELECT * FROM users WHERE name=$name', {
-      $name: sql.escape(body.name)
+      $name: body.name
     },
 
     function(err, row) {
