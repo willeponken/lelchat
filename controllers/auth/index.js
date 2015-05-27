@@ -2,7 +2,6 @@
 
 var router  = require('express').Router(),
     path    = require('path'),
-    sql     = require(path.join(__dirname, '../../lib/sql-utils')),
     bcrypt  = require('bcrypt');
 
 module.exports  = function  authController (db) {
@@ -11,64 +10,56 @@ module.exports  = function  authController (db) {
    * POST /
    * Post login credentials
    */
-  router.post('/', function(req, res) {
+  router.post('/', function(req, res, next) {
     var body    = req.body,
         session = req.session;
   
-    if (!sql.check(body)) {
-      if (!body.name || !body.password) {
-        return res.sendStatus(400).end();
+    if (!body.name || !body.password) {
+      return res.sendStatus(400).end();
+    }
+
+    // Get the user with the defined name
+    db.get('SELECT * FROM users WHERE name=$name', {
+      $name: body.name
+    },
+
+    function(err, user) {
+      if (err) {
+        return next(new Error(err));
       }
 
-      /*if (session.user.name && session.user.id && session.user.type) {
-        return next();*/
+      if (!user) {
+        console.warn('User failed to log in: ' + body.name);
+        return res.sendStatus(401).end();
+      }
 
-      // Get the user with the defined name
-      db.get('SELECT * FROM users WHERE name=' + sql.escape(body.name), function(err) {
+
+      // Compare password and the stored hash
+      bcrypt.compare(body.password, user.password, function(err, success) {
         if (err) {
-          return next(new Error(err));
-        }
-      },
-      function(err, user) {
-        if (err) {
-          return next(new Error(err));
+          return res.sendStatus(500).end();
         }
 
-        if (!user) {
+        if (success) {
+
+          session.user = {
+            id  : user.id,
+            name: user.name,
+            type: user.type
+          };
+          session.save();
+
+          console.info('User logged in: ' + user.name);
+          return res.redirect('/'); // Redirect to /
+
+        } else {
+
           console.warn('User failed to logged in: ' + user.name);
-          return res.sendStatus(401).end();
+          return res.sendStatus(401).end(); // 401 em' h4xX0rz!
         }
-
-
-        // Compare password and the stored hash
-        bcrypt.compare(body.password, user.password, function(err, success) {
-          if (err) {
-            return res.sendStatus(500).end();
-          }
-
-          if (success) {
-
-            session.user = {
-              id  : user.id,
-              name: user.name,
-              type: user.type
-            };
-            session.save();
-
-            console.info('User logged in: ' + user.name);
-            return res.redirect('/'); // Redirect to /
-
-          } else {
-
-            console.warn('User failed to logged in: ' + user.name);
-            return res.sendStatus(401).end(); // 401 em' h4xX0rz!
-          }
-        });
-
       });
-    } else {
-      return res.sendStatus(406).end(); // Not acceptable
-    }
+
+    });
   });
 
   /*
