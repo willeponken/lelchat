@@ -19,7 +19,6 @@
     "express": "^4.12.4",
     "express-session": "^1.11.2",
     "jade": "^1.10.0",
-    "sql-injection": "0.0.5",
     "sqlite3": "^3.0.8"
   }
 }
