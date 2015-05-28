@@ -11,7 +11,7 @@ module.exports  = function  adminController (db) {
   router.get('/', function(req, res) {
     var messages = [];
 
-    db.each('SELECT * FROM messages', function(err, row) {
+    db.each('SELECT * FROM messages ORDER BY id DESC', function(err, row) {
       messages.push({
         id  : row.id,
         name: row.name,
