@@ -1,14 +1,15 @@
 extends ./layout.jade
 
 block title
-  title lelchat - Admin
+  title lelchat - Administration
 
-block content
-  h1 lelchat - Admin
+block header
+  h1 lelchat - Administration
+block slogan
   em Quality administration using shit like SQL.
 
-  hr
-
+block content
+  
   div
     h3 Register user
     form(action='/api/admin/register', method='post', id='registerSubmit')

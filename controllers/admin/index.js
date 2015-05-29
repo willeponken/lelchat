@@ -9,7 +9,8 @@ module.exports  = function  adminController (db) {
    * Render admin page
    */
   router.get('/', function(req, res) {
-    var messages = [];
+    var messages = [],
+        session  = req.session;
 
     db.each('SELECT * FROM messages ORDER BY id DESC', function(err, row) {
       messages.push({
@@ -25,6 +26,7 @@ module.exports  = function  adminController (db) {
       }
 
       return res.render('admin', {
+        user: session.user,
         messages: messages
       });
     });

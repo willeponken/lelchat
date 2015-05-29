@@ -12,4 +12,21 @@ html(lang='en')
     link(rel='stylesheet', href='/stylesheets/default.css')
 
   body
+    block header
+      h1 lelchat
+    block slogan
+      em Quality website using shit like SQL.
+
+    hr
+
+    if user
+      div
+        p Hello, #{user.name}.
+        a(href='/') Home
+        |  | 
+        if user.type === 0
+          a(href='/admin') Administration
+          |  | 
+        a(href='/api/logout') Log out
+    
     block content

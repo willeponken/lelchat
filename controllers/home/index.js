@@ -9,7 +9,8 @@ module.exports  = function  homeController (db) {
    * Render home page
    */
   router.get('/', function(req, res) {
-    var messages = [];
+    var messages = [],
+        session  = req.session;
 
     db.each('SELECT * FROM messages ORDER BY id DESC', function(err, row) {
       messages.push({
@@ -24,6 +25,7 @@ module.exports  = function  homeController (db) {
       }
 
       return res.render('home', {
+        user: session.user,
         messages: messages
       });
     });

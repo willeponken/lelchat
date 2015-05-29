@@ -39,6 +39,21 @@ return module.exports = function apiController (lelchat, db) {
   });
 
 
+   /*
+    * GET /logout
+    * Remove the current session for the
+    * logged in user.
+    */
+   router.get('/logout', function(req, res) {
+     var session = req.session;
+
+     // Delete the current session
+     session.destroy();
+
+     return res.redirect('/');
+   });
+
+
   /*
    * DELETE /admin/message
    * GET    /admin/message

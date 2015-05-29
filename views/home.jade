@@ -1,10 +1,11 @@
 extends ./layout.jade
 
-block content
-  h1 lelchat
+block header
+  h1 lelchat - Home
+block slogan
   em Quality messaging using shit like SQL.
 
-  hr
+block content
 
   div
     h3 Send message
@@ -14,7 +15,7 @@ block content
         br
         textarea(cols='50', rows='5', name='text', placeholder='Write a cute message here')
 
-      button(type='submit', form='messageSubmit') Submit
+      button(type='submit', form='messageSubmit') Send
 
   hr
 
