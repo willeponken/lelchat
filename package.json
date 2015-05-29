@@ -1,7 +1,7 @@
 {
   "name": "lelchat",
-  "version": "0.0.0",
-  "description": "Let's you talk about stuff.",
+  "version": "0.0.1",
+  "description": "Let's you talk about stuff. 100% JS-free, at least on the client side.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,13 +12,13 @@
     "chat"
   ],
   "author": "William Wennerström <william@wiol.io>",
-  "license": "Closed Source",
+  "license": "GPL-3.0",
   "dependencies": {
-    "bcrypt": "^0.8.3",
-    "body-parser": "^1.12.4",
-    "express": "^4.12.4",
-    "express-session": "^1.11.2",
-    "jade": "^1.10.0",
-    "sqlite3": "^3.0.8"
+    "bcrypt": "0.8.3",
+    "body-parser": "1.12.4",
+    "express": "4.12.4",
+    "express-session": "1.11.2",
+    "jade": "1.10.0",
+    "sqlite3": "3.0.8"
   }
 }
